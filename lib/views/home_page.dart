@@ -46,7 +46,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
       });
     });
 
-    dismissAnimation = Tween<double>( // Adjust how fast card is dismissed
+    dismissAnimation = Tween<double>(
       begin: 0,
       end: 600,
     ).animate(
