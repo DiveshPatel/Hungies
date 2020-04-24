@@ -17,7 +17,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Animation<double> rotateAnimation;
   Animation<double> dismissAnimation;
   Animation<double> bottomAnimation;
-  int justSwiped = 0;
+  int justSwiped = 0; // Left is 1, Right is 0
 
   List currentRestaurant = restaurantImages;
   List selectedRestaurant = [];
@@ -52,7 +52,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
     ).animate(
       CurvedAnimation(
         parent: controller,
-        curve: Curves.ease,
+        curve: Curves.bounceOut,
       ),
     );
     bottomAnimation = Tween<double>(
@@ -61,7 +61,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
     ).animate(
       CurvedAnimation(
         parent: controller,
-        curve: Curves.ease,
+        curve: Curves.bounceIn,
       ),
     );
   }
@@ -316,6 +316,12 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                       color: CARD_GREY),
                                   child: Column(
                                     children: <Widget>[
+                                      Center(
+                                        child: Text("3 amigos",
+                                          style:  TextStyle(color: Colors.white,
+                                              fontWeight: FontWeight.normal),
+                                        ),
+                                      ),
                                       Row(
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         mainAxisAlignment: MainAxisAlignment.center,
