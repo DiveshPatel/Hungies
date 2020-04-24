@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hungies/widgets/map.dart';
 import '../constants.dart';
 import 'form_dialog.dart';
 
@@ -14,8 +15,6 @@ class OrderPageState extends State<OrderPage> {
 
   @override
   Widget build(BuildContext context) {
-    int tacoPlatter = 0;
-    int tacoGrill = 0;
     Size defaultSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.black,
@@ -85,31 +84,115 @@ class OrderPageState extends State<OrderPage> {
                                 )),
                                 OrderItem()
                               ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text("Taco Grille", style: TextStyle(
+                                    color: Colors.white
+                                )),
+                                OrderItem()
+                              ],
                             )
                           ],
                         )
                     ),
                     SizedBox(height: 10),
                     Container(
-                      padding:  const EdgeInsets.all(15),
-                      decoration:  BoxDecoration(
-                          borderRadius:  BorderRadius.circular(20.0),
-                          color: CARD_GREY),
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            "ABOUT",
-                            style:  TextStyle(color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                              "3 amigos is a place where you may find mexican style cuisine. "
-                                  "It offers fine sit-down dining as well as take-out with a variety of dessert and drinks.",
-                              style: TextStyle(color: Colors.white,
-                                  fontWeight: FontWeight.normal))
-                        ],
-                      ),
+                        decoration:  BoxDecoration(
+                            borderRadius:  BorderRadius.circular(20.0),
+                            color: CARD_GREY),
+                        padding:  const EdgeInsets.all(15),
+                        alignment: Alignment.center,
+                        child:  Column(
+                          children: <Widget>[
+                            Text(
+                              "Burritos",
+                              style:  TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                            SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text("Burrito", style: TextStyle(
+                                    color: Colors.white
+                                )),
+                                OrderItem()
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text("Burrito Con Frutos Del Mar", style: TextStyle(
+                                    color: Colors.white
+                                )),
+                                OrderItem()
+                              ],
+                            )
+                          ],
+                        )
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                        decoration:  BoxDecoration(
+                            borderRadius:  BorderRadius.circular(20.0),
+                            color: CARD_GREY),
+                        padding:  const EdgeInsets.all(15),
+                        alignment: Alignment.center,
+                        child:  Column(
+                          children: <Widget>[
+                            Text(
+                              "Enchiladas",
+                              style:  TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                            SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text("Enchiladas Classique", style: TextStyle(
+                                    color: Colors.white
+                                )),
+                                OrderItem()
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text("Enchiladas con Mole", style: TextStyle(
+                                    color: Colors.white
+                                )),
+                                OrderItem()
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text("Enchiladas de Pollo", style: TextStyle(
+                                    color: Colors.white
+                                )),
+                                OrderItem()
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text("Poblano Chili Enchiladas", style: TextStyle(
+                                    color: Colors.white
+                                )),
+                                OrderItem()
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text("Enchilada bandera Mexicana", style: TextStyle(
+                                    color: Colors.white
+                                )),
+                                OrderItem()
+                              ],
+                            )
+                          ],
+                        )
                     ),
                   ],
                 ),
@@ -121,6 +204,7 @@ class OrderPageState extends State<OrderPage> {
       bottomNavigationBar: Container(
           padding: EdgeInsets.only(top: 10),
           child: FlatButton(
+            onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => Map())),
               child: Container(
                   height: 65,
                   width: 150,
@@ -153,7 +237,7 @@ class OrderPageState extends State<OrderPage> {
 
 class OrderItem extends StatefulWidget {
   @override
-  _OrderItemState createState() => new _OrderItemState();
+  _OrderItemState createState() =>  _OrderItemState();
 }
 
 class _OrderItemState extends State<OrderItem> {
@@ -162,11 +246,11 @@ class _OrderItemState extends State<OrderItem> {
   Widget build(BuildContext context) {
     return Row(
         children: <Widget>[
-          _itemCount!=0? new  IconButton(icon: new Icon(Icons.remove, color: Colors.white),onPressed: ()=>setState(()=>_itemCount--)):new Container(),
-          new Text(_itemCount.toString(), style: TextStyle(
+          _itemCount!=0?   IconButton(icon:  Icon(Icons.remove, color: Colors.white),onPressed: ()=>setState(()=>_itemCount--)): Container(),
+           Text(_itemCount.toString(), style: TextStyle(
               color: Colors.white
           )),
-          new IconButton(icon: new Icon(Icons.add, color: Colors.white,),onPressed: ()=>setState(()=>_itemCount++))
+           IconButton(icon:  Icon(Icons.add, color: Colors.white,),onPressed: ()=>setState(()=>_itemCount++))
         ],
       );
   }

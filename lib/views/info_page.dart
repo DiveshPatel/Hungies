@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hungies/constants.dart';
 import 'package:hungies/data.dart';
 
+import 'order_page.dart';
+
 class RestaurantInfoPage extends StatefulWidget {
   final DecorationImage selectedImage;
   RestaurantInfoPage({this.selectedImage});
@@ -200,6 +202,7 @@ class _RestaurantInfoPageState extends State<RestaurantInfoPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 FlatButton(
+                    onPressed: ()=> Navigator.pop(context),
                     child: Container(
                         height: 65,
                         width: 65,
@@ -216,6 +219,7 @@ class _RestaurantInfoPageState extends State<RestaurantInfoPage> {
                           color: Colors.red,
                         ))),
                 FlatButton(
+                  onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => OrderPage())),
                     child: Container(
                       height: 65,
                       width: 65,
