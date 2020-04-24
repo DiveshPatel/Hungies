@@ -6,7 +6,7 @@ List restaurantImages = [
     fit: BoxFit.cover,
   ),
   DecorationImage(
-    image: new ExactAssetImage('assets/pizzahut.jpg'),
+    image: new ExactAssetImage('assets/pizzahut.webp'),
     fit: BoxFit.cover,
   ),
   DecorationImage(
