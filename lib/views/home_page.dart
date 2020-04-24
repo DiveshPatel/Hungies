@@ -16,7 +16,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   AnimationController controller;
   Animation<double> rotateAnimation;
   Animation<double> dismissAnimation;
-  Animation<double> bottom;
+  Animation<double> bottomAnimation;
   int booleanFlag = 0;
 
   List currentRestaurant = restaurantImages;
@@ -55,7 +55,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
         curve: Curves.ease,
       ),
     );
-    bottom = Tween<double>(
+    bottomAnimation = Tween<double>(
       begin: 10,
       end: 150,
     ).animate(
@@ -170,7 +170,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   children: currentRestaurant.map((restaurant) { // Here we loop through each of the restaurants and place them accordingly
                     if (currentRestaurant.indexOf(restaurant) == suggestions - 1) {
                       return Positioned(
-                        bottom: defaultBottomCardPos + bottom.value,
+                        bottom: defaultBottomCardPos + bottomAnimation.value,
                         right: booleanFlag == 0 // This ensures that the card rotates properly on swiperight()
                             ? dismissAnimation.value != 0.0 ? dismissAnimation.value : null
                             : null,
