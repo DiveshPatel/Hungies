@@ -13,7 +13,7 @@ class _RestaurantInfoPageState extends State<RestaurantInfoPage> {
   DecorationImage selectedImage;
   _RestaurantInfoPageState({this.selectedImage});
   List data = restaurantImages;
-  double _appBarHeight = 256.0;
+  double _appBarHeight = 260;
 
   @override
   Widget build(BuildContext context) {

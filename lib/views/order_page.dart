@@ -9,18 +9,20 @@ class OrderPage extends StatefulWidget {
 }
 
 class OrderPageState extends State<OrderPage> {
-  double _appBarHeight = 256.0;
+  double _appBarHeight = 150;
 
 
   @override
   Widget build(BuildContext context) {
+    int tacoPlatter = 0;
+    int tacoGrill = 0;
     Size defaultSize = MediaQuery.of(context).size;
-
     return Scaffold(
       backgroundColor: Colors.black,
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
+            backgroundColor: Colors.transparent,
             forceElevated: true,
             leading:  IconButton(
               onPressed: () => Navigator.of(context).pop(),
@@ -42,7 +44,11 @@ class OrderPageState extends State<OrderPage> {
                     child: Column(
                       children: <Widget>[
                         SizedBox(height:150),
-                        Text("Test")
+                        Text("Order",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30
+                        ),)
                       ],
                     ),
                   ),
@@ -67,81 +73,19 @@ class OrderPageState extends State<OrderPage> {
                         child:  Column(
                           children: <Widget>[
                             Text(
-                              "INFO",
-                              style:  TextStyle(color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                              "Tacos",
+                              style:  TextStyle(color: Colors.white, fontSize: 18),
                             ),
                             SizedBox(height: 10),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                Icon(
-                                  Icons.location_on,
-                                  color: PRIMARY_COLOR,
-                                ),
-                                SizedBox(width: 10),
-                                Flexible(
-                                  child: Text("1657 Saint-Catherine St W, Montreal, Quebec H3H 1L7",
-                                    style:  TextStyle(color: Colors.white,
-                                        fontWeight: FontWeight.normal),
-                                  ),
-                                )
+                                Text("Taco Platter", style: TextStyle(
+                                  color: Colors.white
+                                )),
+                                OrderItem()
                               ],
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.phone,
-                                  color: PRIMARY_COLOR,
-                                ),
-                                SizedBox(width: 10),
-                                Text("(514) 939-3329",
-                                  style:  TextStyle(color: Colors.white,
-                                      fontWeight: FontWeight.normal),
-                                )
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.access_time,
-                                  color: PRIMARY_COLOR,
-                                ),
-                                SizedBox(width: 10),
-                                Text("9:00  AM - 8:00 PM",
-                                    style:  TextStyle(color: Colors.white,
-                                        fontWeight: FontWeight.normal))
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.directions_walk,
-                                  color: PRIMARY_COLOR,
-                                ),
-                                SizedBox(width: 10),
-                                Text("7 min (600 m)",
-                                  style:  TextStyle(color: Colors.white,
-                                      fontWeight: FontWeight.normal),
-                                )
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              children: <Widget>[
-                                Icon(
-                                  Icons.public,
-                                  color: PRIMARY_COLOR,
-                                ),
-                                SizedBox(width: 10),
-                                Text("3amigosrestaurants.com",
-                                  style:  TextStyle(color: Colors.white,
-                                      fontWeight: FontWeight.normal),
-                                )
-                              ],
-                            ),
+                            )
                           ],
                         )
                     ),
@@ -165,22 +109,6 @@ class OrderPageState extends State<OrderPage> {
                               style: TextStyle(color: Colors.white,
                                   fontWeight: FontWeight.normal))
                         ],
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    SizedBox(
-                      height: 150,
-                      child: ClipRRect(
-                        borderRadius:  BorderRadius.circular(20.0),
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: <Widget>[
-                            Image.asset("assets/3amigosfront.jpeg"),
-                            Image.asset("assets/3amigosinside.jpeg"),
-                            Image.asset("assets/3amigos2.jpg"),
-                            Image.asset("assets/3amigos3.jpg")
-                          ],
-                        ),
                       ),
                     ),
                   ],
@@ -220,5 +148,26 @@ class OrderPageState extends State<OrderPage> {
   @override
   void dispose() {
     super.dispose();
+  }
+}
+
+class OrderItem extends StatefulWidget {
+  @override
+  _OrderItemState createState() => new _OrderItemState();
+}
+
+class _OrderItemState extends State<OrderItem> {
+  int _itemCount = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+        children: <Widget>[
+          _itemCount!=0? new  IconButton(icon: new Icon(Icons.remove, color: Colors.white),onPressed: ()=>setState(()=>_itemCount--)):new Container(),
+          new Text(_itemCount.toString(), style: TextStyle(
+              color: Colors.white
+          )),
+          new IconButton(icon: new Icon(Icons.add, color: Colors.white,),onPressed: ()=>setState(()=>_itemCount++))
+        ],
+      );
   }
 }
