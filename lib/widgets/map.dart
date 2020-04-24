@@ -19,7 +19,6 @@ class _MapState extends State<Map> {
 
   @override
   Future<void> initState() {
-
     super.initState();
     List<LatLng> latlngPoints = new List();
     latlngPoints.add(LatLng(45.497044, -73.578439));
@@ -49,10 +48,9 @@ class _MapState extends State<Map> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+          centerTitle: true,
           title: new Text("Heading to 3 amigos"),
           backgroundColor: Colors.black),
       body: Stack(

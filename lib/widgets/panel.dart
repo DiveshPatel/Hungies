@@ -37,14 +37,19 @@ class PanelState extends State<Panel> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Icon(Icons.directions_walk, color: Colors.white,),
+                      Icon(
+                        Icons.directions_walk,
+                        color: Colors.white,
+                      ),
                       Flexible(
                         child: Text(
                           "Estimated time: 7 min (0.6 km)",
                           style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
                       ),
-                      IconButton(icon: Icon(Icons.close, color: Colors.white), onPressed: () => {})
+                      IconButton(
+                          icon: Icon(Icons.close, color: Colors.white),
+                          onPressed: () => {})
                     ],
                   ),
                 ],
@@ -61,7 +66,7 @@ class PanelState extends State<Panel> {
   Widget _scrollingList(ScrollController sc, List<String> movements) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black,
+          color: Colors.black,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
@@ -81,11 +86,16 @@ class PanelState extends State<Panel> {
                     SizedBox(
                       width: 10,
                     ),
-                    Text("${i + 1}.", style: TextStyle(color: Colors.white),),
+                    Text(
+                      "${i + 1}.",
+                      style: TextStyle(color: Colors.white),
+                    ),
                     SizedBox(
                       width: 10,
                     ),
-                    Flexible(child: Text("${movements[i]}", style: TextStyle(color: Colors.white))),
+                    Flexible(
+                        child: Text("${movements[i]}",
+                            style: TextStyle(color: Colors.white))),
                   ],
                 ),
                 Divider(

@@ -24,21 +24,24 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    controller = AnimationController(
-        duration: Duration(milliseconds: 500), vsync: this);
+    controller =
+        AnimationController(duration: Duration(milliseconds: 500), vsync: this);
 
     rotateAnimation = Tween<double>(
       begin: -0,
-      end: -0, // Adjust the angle of how much the card rotates when it is dismissed
+      end:
+          -0, // Adjust the angle of how much the card rotates when it is dismissed
     ).animate(
       CurvedAnimation(
         parent: controller,
         curve: Curves.ease,
       ),
     );
-    rotateAnimation.addListener(() { // Adjust how the card rotates when dismissed
+    rotateAnimation.addListener(() {
+      // Adjust how the card rotates when dismissed
       setState(() {
-        if (rotateAnimation.isCompleted) { // Check when the future rotation is completed
+        if (rotateAnimation.isCompleted) {
+          // Check when the future rotation is completed
           var i = currentRestaurant.removeLast();
           currentRestaurant.insert(0, i);
           controller.reset();
@@ -95,7 +98,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
     double backCardPosition = initialBottom + (suggestions - 1) * 10 + 10;
     double backCardWidth = -10.0;
     return Scaffold(
-      backgroundColor: Colors.black,
+        backgroundColor: Colors.black,
         appBar: AppBar(
           brightness: Brightness.dark,
           backgroundColor: Colors.black,
@@ -110,10 +113,10 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
           actions: <Widget>[
             Container(
                 child: Icon(
-                  Icons.account_circle,
-                  color: PRIMARY_COLOR,
-                  size: 30.0,
-                )),
+              Icons.account_circle,
+              color: PRIMARY_COLOR,
+              size: 30.0,
+            )),
           ],
           title: Icon(
             Icons.fastfood,
@@ -123,78 +126,82 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ),
         bottomNavigationBar: Container(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                FlatButton(
-                  onPressed: swipeLeft,
-                    child: Container(
-                        height: 65,
-                        width: 65,
-                        decoration:
-                        BoxDecoration(
-                          color: CARD_GREY,
-                          borderRadius:
-                          BorderRadius
-                              .circular(
-                              60.0),
-                        ),
-                        child: Icon(
-                          Icons.clear,
-                          color: Colors.red,
-                        ))),
-                FlatButton(
-                  onPressed: swipeRight,
-                    child: Container(
-                      height: 65,
-                      width: 65,
-                      decoration:
-                      BoxDecoration(
-                        color: CARD_GREY,
-                        borderRadius:
-                        BorderRadius
-                            .circular(
-                            60.0),
-                      ),
-                      child: Icon(
-                        Icons.favorite,
-                        color: PRIMARY_COLOR,
-                      ),
-                    ))
-              ],
-            )),
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            FlatButton(
+                onPressed: swipeLeft,
+                child: Container(
+                    height: 65,
+                    width: 65,
+                    decoration: BoxDecoration(
+                      color: CARD_GREY,
+                      borderRadius: BorderRadius.circular(60.0),
+                    ),
+                    child: Icon(
+                      Icons.clear,
+                      color: Colors.red,
+                    ))),
+            FlatButton(
+                onPressed: swipeRight,
+                child: Container(
+                  height: 65,
+                  width: 65,
+                  decoration: BoxDecoration(
+                    color: CARD_GREY,
+                    borderRadius: BorderRadius.circular(60.0),
+                  ),
+                  child: Icon(
+                    Icons.favorite,
+                    color: PRIMARY_COLOR,
+                  ),
+                ))
+          ],
+        )),
         body: Container(
           color: Colors.black,
-          child: suggestions > 0 // If the number of restaurants suggestions left are greater than 0 then show the stack of cards
+          child: suggestions >
+                  0 // If the number of restaurants suggestions left are greater than 0 then show the stack of cards
               ? Stack(
                   alignment: AlignmentDirectional.bottomCenter,
-                  children: currentRestaurant.map((restaurant) { // Here we loop through each of the restaurants and place them accordingly
-                    if (currentRestaurant.indexOf(restaurant) == suggestions - 1) {
+                  children: currentRestaurant.map((restaurant) {
+                    // Here we loop through each of the restaurants and place them accordingly
+                    if (currentRestaurant.indexOf(restaurant) ==
+                        suggestions - 1) {
                       return Positioned(
                         bottom: defaultBottomCardPos + bottomAnimation.value,
-                        right: justSwiped == 0 // This ensures that the card rotates properly on swiperight()
-                            ? dismissAnimation.value != 0.0 ? dismissAnimation.value : null
+                        right: justSwiped ==
+                                0 // This ensures that the card rotates properly on swiperight()
+                            ? dismissAnimation.value != 0.0
+                                ? dismissAnimation.value
+                                : null
                             : null,
-                        left: justSwiped == 1 // This ensures that the card rotates properly on swipeLeft()
-                            ? dismissAnimation.value != 0.0 ? dismissAnimation.value : null
+                        left: justSwiped ==
+                                1 // This ensures that the card rotates properly on swipeLeft()
+                            ? dismissAnimation.value != 0.0
+                                ? dismissAnimation.value
+                                : null
                             : null,
                         child: Dismissible(
-                          crossAxisEndOffset: -0.1, // Controls how high the card will exit the screen when swiping left or right
+                          crossAxisEndOffset:
+                              -0.1, // Controls how high the card will exit the screen when swiping left or right
                           key: Key("Primary Card"),
                           onDismissed: (DismissDirection direction) {
                             if (direction == DismissDirection.endToStart) {
                               onDimissCurrentSuggestion(restaurant);
-                            }
-                            else {
+                            } else {
                               onAddCurrentSuggestion(restaurant);
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => OrderPage()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => OrderPage()));
                             }
                           },
                           child: Transform(
                             alignment: justSwiped == 0
                                 ? Alignment.bottomRight
                                 : Alignment.bottomLeft,
-                            transform:
-                                Matrix4.skewX(rotateAnimation.value < -10 ? 0.1 : 0.0),
+                            transform: Matrix4.skewX(
+                                rotateAnimation.value < -10 ? 0.1 : 0.0),
                             child: RotationTransition(
                               turns: AlwaysStoppedAnimation(justSwiped == 0
                                   ? rotateAnimation.value / 360
@@ -203,9 +210,13 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 tag: "image",
                                 child: GestureDetector(
                                   onTap: () {
-                                    Navigator.of(context).push(MaterialPageRoute( // Show the info page on tap
-                                        builder: (context) => RestaurantInfoPage(selectedImage: restaurant)
-                                    ));
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            // Show the info page on tap
+                                            builder: (context) =>
+                                                RestaurantInfoPage(
+                                                    selectedImage:
+                                                        restaurant)));
                                   },
                                   child: Card(
                                     color: Colors.transparent,
@@ -229,29 +240,36 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                 10,
                                             height: defaultSize.height / 2.2,
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(20.0),
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
                                               image: restaurant,
                                             ),
                                           ),
                                           Container(
-                                            padding:  const EdgeInsets.all(15),
-                                            decoration:  BoxDecoration(
-                                                borderRadius:  BorderRadius.circular(20.0),
+                                            padding: const EdgeInsets.all(15),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
                                                 color: CARD_GREY),
                                             child: Column(
                                               children: <Widget>[
                                                 Row(
-                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
                                                   children: <Widget>[
                                                     Icon(
                                                       Icons.directions_walk,
                                                       color: PRIMARY_COLOR,
                                                     ),
                                                     SizedBox(width: 10),
-                                                    Text("4 min (300 m)",
-                                                      style:  TextStyle(color: Colors.white,
-                                                          fontWeight: FontWeight.normal),
+                                                    Text(
+                                                      "4 min (300 m)",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight: FontWeight
+                                                              .normal),
                                                     )
                                                   ],
                                                 ),
@@ -260,15 +278,20 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                   children: <Widget>[
                                                     Text(
                                                       "About",
-                                                      style:  TextStyle(color: Colors.white,
-                                                          fontWeight: FontWeight.bold,
-                                                      fontSize: 16),
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 16),
                                                     ),
                                                     SizedBox(height: 10),
                                                     Text(
                                                         "Lebanese style restaurant. ",
-                                                        style: TextStyle(color: Colors.white,
-                                                            fontWeight: FontWeight.normal))
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal))
                                                   ],
                                                 ),
                                               ],
@@ -287,22 +310,24 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     } else {
                       backCardPosition = backCardPosition - 10;
                       backCardWidth = backCardWidth + 10;
-                      return  Positioned(
+                      return Positioned(
                         bottom: defaultBottomCardPos + backCardPosition,
-                        child:  Card(
-                          color: Colors.transparent, // IMPORTANT: No white borders!!!
-                          child:  Container(
+                        child: Card(
+                          color: Colors
+                              .transparent, // IMPORTANT: No white borders!!!
+                          child: Container(
                             alignment: Alignment.center,
                             width: defaultSize.width / 1.2 + backCardWidth,
                             height: defaultSize.height / 1.6,
-                            decoration:  BoxDecoration(
+                            decoration: BoxDecoration(
                               color: CARD_GREY,
-                              borderRadius:  BorderRadius.circular(20.0),
+                              borderRadius: BorderRadius.circular(20.0),
                             ),
                             child: Column(
                               children: <Widget>[
                                 Container(
-                                  width: defaultSize.width / 1.2 + backCardWidth,
+                                  width:
+                                      defaultSize.width / 1.2 + backCardWidth,
                                   height: defaultSize.height / 2.2,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20.0),
@@ -310,29 +335,35 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   ),
                                 ),
                                 Container(
-                                  padding:  const EdgeInsets.all(15),
-                                  decoration:  BoxDecoration(
-                                      borderRadius:  BorderRadius.circular(20.0),
+                                  padding: const EdgeInsets.all(15),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20.0),
                                       color: CARD_GREY),
                                   child: Column(
                                     children: <Widget>[
                                       Center(
-                                        child: Text("3 amigos",
-                                          style:  TextStyle(color: Colors.white,
+                                        child: Text(
+                                          "3 amigos",
+                                          style: TextStyle(
+                                              color: Colors.white,
                                               fontWeight: FontWeight.normal),
                                         ),
                                       ),
                                       Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: <Widget>[
                                           Icon(
                                             Icons.directions_walk,
                                             color: PRIMARY_COLOR,
                                           ),
                                           SizedBox(width: 10),
-                                          Text("7 min (600 m)",
-                                            style:  TextStyle(color: Colors.white,
+                                          Text(
+                                            "7 min (600 m)",
+                                            style: TextStyle(
+                                                color: Colors.white,
                                                 fontWeight: FontWeight.normal),
                                           )
                                         ],
@@ -342,15 +373,17 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         children: <Widget>[
                                           Text(
                                             "About",
-                                            style:  TextStyle(color: Colors.white,
+                                            style: TextStyle(
+                                                color: Colors.white,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 16),
                                           ),
                                           SizedBox(height: 10),
-                                          Text(
-                                              "Mexican style restaurant. ",
-                                              style: TextStyle(color: Colors.white,
-                                                  fontWeight: FontWeight.normal))
+                                          Text("Mexican style restaurant. ",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight:
+                                                      FontWeight.normal))
                                         ],
                                       ),
                                     ],
@@ -363,14 +396,17 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       );
                     }
                   }).toList())
-              : Center( // Show this if there are no restaurants left to display
-                child: Container(
+              : Center(
+                  // Show this if there are no restaurants left to display
+                  child: Container(
                     width: defaultSize.width - 80,
-                  child: Text("Sorry you didn't like any of the choices. We'll try better next time :)",
+                    child: Text(
+                      "Sorry you didn't like any of the choices. We'll try better next time :)",
                       style: TextStyle(color: Colors.white, fontSize: 20),
-                  textAlign: TextAlign.center,),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 ),
-              ),
         ));
   }
 
@@ -380,7 +416,8 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
         justSwiped = 1;
       });
     swipeAnimation();
-    Navigator.push(context, MaterialPageRoute(builder: (context) => OrderPage()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => OrderPage()));
   }
 
   swipeLeft() {
