@@ -19,7 +19,7 @@ class _RestaurantInfoPageState extends State<RestaurantInfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    int img = data.indexOf(selectedImage);
+    int selectedSuggestion = data.indexOf(selectedImage);
     return  Theme(
       data:  ThemeData(
         brightness: Brightness.dark,
@@ -49,7 +49,7 @@ class _RestaurantInfoPageState extends State<RestaurantInfoPage> {
                      height: _appBarHeight,
                      decoration:  BoxDecoration(
                        borderRadius:  BorderRadius.circular(20.0),
-                       image: data[img],
+                       image: data[selectedSuggestion],
                      ),
                    ),
                  ],
