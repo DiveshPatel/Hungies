@@ -55,7 +55,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
         curve: Curves.ease,
       ),
     );
-    bottom = Tween<double>( // Adjust how fast bottom axis animation is dismissed
+    bottom = Tween<double>(
       begin: 10,
       end: 150,
     ).animate(
