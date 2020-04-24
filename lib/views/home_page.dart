@@ -4,7 +4,7 @@ import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:hungies/views/order_page.dart';
 import 'package:hungies/widgets/map.dart';
 import 'package:hungies/constants.dart';
-import '../data.dart';
+import '../suggestion_images.dart';
 import 'info_page.dart';
 
 class HomePage extends StatefulWidget {

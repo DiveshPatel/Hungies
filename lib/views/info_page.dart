@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hungies/constants.dart';
-import 'package:hungies/data.dart';
+import 'package:hungies/suggestion_images.dart';
 
 import 'order_page.dart';
 
