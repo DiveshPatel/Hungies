@@ -219,7 +219,10 @@ class _RestaurantInfoPageState extends State<RestaurantInfoPage> {
                           color: Colors.red,
                         ))),
                 FlatButton(
-                  onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => OrderPage())),
+                  onPressed: ()=> {
+                    Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => OrderPage()))
+                  },
                     child: Container(
                       height: 65,
                       width: 65,
