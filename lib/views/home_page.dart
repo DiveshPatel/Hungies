@@ -51,7 +51,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     dismissAnimation = Tween<double>(
       begin: 0,
-      end: 600,
+      end: 400,
     ).animate(
       CurvedAnimation(
         parent: controller,
@@ -59,8 +59,8 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
       ),
     );
     bottomAnimation = Tween<double>(
-      begin: 10,
-      end: 150,
+      begin: 20,
+      end: 140,
     ).animate(
       CurvedAnimation(
         parent: controller,
@@ -170,13 +170,13 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       return Positioned(
                         bottom: defaultBottomCardPos + bottomAnimation.value,
                         right: justSwiped ==
-                                0 // This ensures that the card rotates properly on swiperight()
+                                0
                             ? dismissAnimation.value != 0.0
                                 ? dismissAnimation.value
                                 : null
                             : null,
                         left: justSwiped ==
-                                1 // This ensures that the card rotates properly on swipeLeft()
+                                1
                             ? dismissAnimation.value != 0.0
                                 ? dismissAnimation.value
                                 : null
@@ -206,99 +206,96 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               turns: AlwaysStoppedAnimation(justSwiped == 0
                                   ? rotateAnimation.value / 360
                                   : -rotateAnimation.value / 360),
-                              child: Hero(
-                                tag: "image",
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            // Show the info page on tap
-                                            builder: (context) =>
-                                                RestaurantInfoPage(
-                                                    selectedImage:
-                                                        restaurant)));
-                                  },
-                                  child: Card(
-                                    color: Colors.transparent,
-                                    elevation: 4.0,
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      width: defaultSize.width / 1.2 +
-                                          backCardWidth +
-                                          10,
-                                      height: defaultSize.height / 1.6,
-                                      decoration: BoxDecoration(
-                                        color: CARD_GREY,
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Container(
-                                            width: defaultSize.width / 1.2 +
-                                                backCardWidth +
-                                                10,
-                                            height: defaultSize.height / 2.2,
-                                            decoration: BoxDecoration(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                          // Show the info page on tap
+                                          builder: (context) =>
+                                              RestaurantInfoPage(
+                                                  selectedImage:
+                                                      restaurant)));
+                                },
+                                child: Card(
+                                  color: Colors.transparent,
+                                  elevation: 4.0,
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    width: defaultSize.width / 1.2 +
+                                        backCardWidth +
+                                        10,
+                                    height: defaultSize.height / 1.6,
+                                    decoration: BoxDecoration(
+                                      color: CARD_GREY,
+                                      borderRadius:
+                                          BorderRadius.circular(20.0),
+                                    ),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Container(
+                                          width: defaultSize.width / 1.2 +
+                                              backCardWidth +
+                                              10,
+                                          height: defaultSize.height / 2.2,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                            image: restaurant,
+                                          ),
+                                        ),
+                                        Container(
+                                          padding: const EdgeInsets.all(15),
+                                          decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(20.0),
-                                              image: restaurant,
-                                            ),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(15),
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                                color: CARD_GREY),
-                                            child: Column(
-                                              children: <Widget>[
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Icon(
-                                                      Icons.directions_walk,
-                                                      color: PRIMARY_COLOR,
-                                                    ),
-                                                    SizedBox(width: 10),
-                                                    Text(
-                                                      "4 min (300 m)",
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight: FontWeight
-                                                              .normal),
-                                                    )
-                                                  ],
-                                                ),
-                                                SizedBox(height: 10),
-                                                Column(
-                                                  children: <Widget>[
-                                                    Text(
-                                                      "About",
+                                              color: CARD_GREY),
+                                          child: Column(
+                                            children: <Widget>[
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Icon(
+                                                    Icons.directions_walk,
+                                                    color: PRIMARY_COLOR,
+                                                  ),
+                                                  SizedBox(width: 10),
+                                                  Text(
+                                                    "4 min (300 m)",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight: FontWeight
+                                                            .normal),
+                                                  )
+                                                ],
+                                              ),
+                                              SizedBox(height: 10),
+                                              Column(
+                                                children: <Widget>[
+                                                  Text(
+                                                    "About",
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16),
+                                                  ),
+                                                  SizedBox(height: 10),
+                                                  Text(
+                                                      "Mexican style restaurant. ",
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 16),
-                                                    ),
-                                                    SizedBox(height: 10),
-                                                    Text(
-                                                        "Mexican style restaurant. ",
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal))
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
+                                                              FontWeight
+                                                                  .normal))
+                                                ],
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
