@@ -34,7 +34,6 @@ class OnboardingPageState extends State<OnboardingPage> {
                   ),
                   SizedBox(height: 25),
                   Container(
-                    width: defaultSize.width - 40,
                     child: Text("Before we begin, we just have to ask a question "
                         "to provide you with the best possible experience.",
                         textAlign: TextAlign.center,
@@ -70,7 +69,7 @@ class OnboardingPageState extends State<OnboardingPage> {
               Icon(
                 Icons.fastfood,
                 color: PRIMARY_COLOR,
-                size: 70,
+                size: 60,
               )
             ],
           ),
