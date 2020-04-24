@@ -286,7 +286,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                     ),
                                                     SizedBox(height: 10),
                                                     Text(
-                                                        "Lebanese style restaurant. ",
+                                                        "Mexican style restaurant. ",
                                                         style: TextStyle(
                                                             color: Colors.white,
                                                             fontWeight:
@@ -341,14 +341,6 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                       color: CARD_GREY),
                                   child: Column(
                                     children: <Widget>[
-                                      Center(
-                                        child: Text(
-                                          "3 amigos",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.normal),
-                                        ),
-                                      ),
                                       Row(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
