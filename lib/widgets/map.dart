@@ -52,6 +52,7 @@ class _MapState extends State<Map> {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
           title: new Text("Heading to 3 amigos"),
           backgroundColor: Colors.black),
       body: Stack(
