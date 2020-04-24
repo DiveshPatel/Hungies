@@ -17,7 +17,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Animation<double> rotateAnimation;
   Animation<double> dismissAnimation;
   Animation<double> bottomAnimation;
-  int booleanFlag = 0;
+  int justSwiped = 0;
 
   List currentRestaurant = restaurantImages;
   List selectedRestaurant = [];
@@ -171,10 +171,10 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     if (currentRestaurant.indexOf(restaurant) == suggestions - 1) {
                       return Positioned(
                         bottom: defaultBottomCardPos + bottomAnimation.value,
-                        right: booleanFlag == 0 // This ensures that the card rotates properly on swiperight()
+                        right: justSwiped == 0 // This ensures that the card rotates properly on swiperight()
                             ? dismissAnimation.value != 0.0 ? dismissAnimation.value : null
                             : null,
-                        left: booleanFlag == 1 // This ensures that the card rotates properly on swipeLeft()
+                        left: justSwiped == 1 // This ensures that the card rotates properly on swipeLeft()
                             ? dismissAnimation.value != 0.0 ? dismissAnimation.value : null
                             : null,
                         child: Dismissible(
@@ -190,13 +190,13 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             }
                           },
                           child: Transform(
-                            alignment: booleanFlag == 0
+                            alignment: justSwiped == 0
                                 ? Alignment.bottomRight
                                 : Alignment.bottomLeft,
                             transform:
                                 Matrix4.skewX(rotateAnimation.value < -10 ? 0.1 : 0.0),
                             child: RotationTransition(
-                              turns: AlwaysStoppedAnimation(booleanFlag == 0
+                              turns: AlwaysStoppedAnimation(justSwiped == 0
                                   ? rotateAnimation.value / 360
                                   : -rotateAnimation.value / 360),
                               child: Hero(
@@ -369,18 +369,18 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   swipeRight() {
-    if (booleanFlag == 0)
+    if (justSwiped == 0)
       setState(() {
-        booleanFlag = 1;
+        justSwiped = 1;
       });
     swipeAnimation();
     Navigator.push(context, MaterialPageRoute(builder: (context) => OrderPage()));
   }
 
   swipeLeft() {
-    if (booleanFlag == 1)
+    if (justSwiped == 1)
       setState(() {
-        booleanFlag = 0;
+        justSwiped = 0;
       });
     swipeAnimation();
   }
