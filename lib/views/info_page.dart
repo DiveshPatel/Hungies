@@ -195,6 +195,7 @@ class _RestaurantInfoPageState extends State<RestaurantInfoPage> {
          ],
             ),
         bottomNavigationBar: Container(
+          padding: EdgeInsets.only(top: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
