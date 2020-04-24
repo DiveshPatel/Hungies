@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hungies/constants.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class Panel extends StatefulWidget {
@@ -23,7 +24,7 @@ class PanelState extends State<Panel> {
           panelBuilder: (ScrollController sc) => _scrollingList(sc, movements),
           collapsed: Container(
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: Colors.black,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
                   topRight: Radius.circular(20),
@@ -31,19 +32,19 @@ class PanelState extends State<Panel> {
             child: Center(
               child: Column(
                 children: <Widget>[
-                  Icon(Icons.maximize),
+                  Icon(Icons.maximize, color: Colors.white),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Icon(Icons.directions_walk),
+                      Icon(Icons.directions_walk, color: Colors.white,),
                       Flexible(
                         child: Text(
                           "Estimated time: 7 min (0.6 km)",
-                          style: TextStyle(color: Colors.black, fontSize: 18),
+                          style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
                       ),
-                      IconButton(icon: Icon(Icons.close), onPressed: () => {})
+                      IconButton(icon: Icon(Icons.close, color: Colors.white), onPressed: () => {})
                     ],
                   ),
                 ],
@@ -58,46 +59,43 @@ class PanelState extends State<Panel> {
   }
 
   Widget _scrollingList(ScrollController sc, List<String> movements) {
-    return ListView.builder(
-      controller: sc,
-      itemCount: movements.length,
-      itemBuilder: (BuildContext context, int i) {
-        return Padding(
-          padding: const EdgeInsets.all(15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  getIcon(movements[i]),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text("${i + 1}."),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Flexible(child: Text("${movements[i]}")),
-                ],
-              ),
-              Divider(
-                color: Colors.grey,
-              ),
-            ],
-          ),
-        );
-      },
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.black,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          )),
+      child: ListView.builder(
+        controller: sc,
+        itemCount: movements.length,
+        itemBuilder: (BuildContext context, int i) {
+          return Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text("${i + 1}.", style: TextStyle(color: Colors.white),),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Flexible(child: Text("${movements[i]}", style: TextStyle(color: Colors.white))),
+                  ],
+                ),
+                Divider(
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
-}
-
-ImageIcon getIcon(String movementType) {
-  if (movementType.contains("Turn left"))
-    return ImageIcon(
-      AssetImage("assets/left.png"),
-    );
-  else if (movementType.contains("Turn right"))
-    return ImageIcon(AssetImage("assets/right.png"));
-  return ImageIcon(AssetImage("assets/head.png"));
 }

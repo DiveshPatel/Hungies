@@ -18,7 +18,8 @@ class _MapState extends State<Map> {
   LatLng destination = LatLng(45.494276, -73.578771);
 
   @override
-  void initState() {
+  Future<void> initState() {
+
     super.initState();
     List<LatLng> latlngPoints = new List();
     latlngPoints.add(LatLng(45.497044, -73.578439));
@@ -48,10 +49,11 @@ class _MapState extends State<Map> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
           title: new Text("Heading to 3 amigos"),
-          backgroundColor: PRIMARY_COLOR),
+          backgroundColor: Colors.black),
       body: Stack(
         children: <Widget>[
           Container(
@@ -61,13 +63,16 @@ class _MapState extends State<Map> {
             myLocationButtonEnabled: false,
             mapToolbarEnabled: false,
             compassEnabled: true,
-            indoorViewEnabled: true,
+            indoorViewEnabled: false,
             polylines: polylines,
             markers: markers,
             initialCameraPosition: CameraPosition(
                 target: LatLng(45.4977298, -73.579034), zoom: 17),
-            onMapCreated: (GoogleMapController controller) {
+            onMapCreated: (GoogleMapController controller) async {
               _completer.complete(controller);
+              String value = await DefaultAssetBundle.of(context)
+                  .loadString('assets/map_style.json');
+              controller.setMapStyle(value);
             },
           )),
           Positioned(
@@ -80,7 +85,7 @@ class _MapState extends State<Map> {
                   FloatingActionButton(
                     heroTag: 'location',
                     onPressed: () {},
-                    backgroundColor: Colors.white,
+                    backgroundColor: DARK_GREY,
                     foregroundColor: PRIMARY_COLOR,
                     child: Icon(Icons.my_location),
                   ),
@@ -90,7 +95,7 @@ class _MapState extends State<Map> {
                   FloatingActionButton(
                     onPressed: () {},
                     backgroundColor: PRIMARY_COLOR,
-                    foregroundColor: Colors.white,
+                    foregroundColor: Colors.black,
                     child: Icon(Icons.directions),
                   ),
                 ]),
